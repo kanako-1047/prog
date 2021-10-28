@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>おみくじ</title>
+</head>
+<body>
+
+<header>
+    <h1>おみくじ</h1>
+    <div id="line">
+        <img src="omikuzi_line.png" alt="">
+    </div>    
+</header>
+
+
+<style>
+    body{
+        background-color: antiquewhite; 
+        border-style:double;
+        border-width: 20px 20px;
+        border-color: red;
+    }
+    header{
+        background-color: antiquewhite;
+    }
+    
+    #line{
+        text-align: center;
+        transform: scale(1.3);
+    }
+</style>
+
+
+<main>
+    <ul>
+        <li id="pull">おみくじを引く</li>
+    </ul>
+    <p id="echo"></p>
+</main>
+
+
+<script>
+    const pull=document.querySelector("#pull");
+    const echo=document.querySelector("#echo");
+
+
+    pull.onclick=function(){
+        //乱数を作る
+        const num=Math.ceil(Math.random()*5);
+        pull.innerHTML="もう一度引く";
+
+        //乱数をif分岐処理で分ける
+        if(num==1){
+        echo.innerHTML="大吉";
+        echo.style.color="#ff0000";
+        echo.style.fontSize="64px";
+        }
+        if(num==2){
+        echo.innerHTML="中吉";
+        echo.style.color="#ff8c00";
+        echo.style.fontSize="64px";
+        }
+        if(num==3){
+        echo.innerHTML="小吉";
+        echo.style.color="#00ff00";
+        echo.style.fontSize="64px";
+        }
+        if(num==4){
+        echo.innerHTML="吉";
+        echo.style.color="#00bfff";
+        echo.style.fontSize="64px";
+        }
+        if(num==5){
+        echo.innerHTML="凶";
+        echo.style.color="#8a2be2";
+        echo.style.fontSize="64px";
+        }
+    }
+
+</script>
+</body>
+</html>
