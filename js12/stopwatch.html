@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ストップウォッチ</title>
+</head>
+<body>
+    <h1>⏱ストップウォッチ⏱</h1>
+    <h2 id="time">00:00:00</h2>
+    
+    <!-- ボタンのレイアウト -->
+    <table>
+        <tr>
+            <td id="start" value="start"><img src="start.png" width="200px" ></td>
+            <td id="teisi" value="teisi"><img src="stop.png" width="200px"></td>
+            <td id="reset" value="reset"><img src="reset.png" width="200px"></td>
+        </tr>
+    </table>
+
+    <style>
+        h2{
+            font-size: 90px;
+        }
+
+        body{
+            text-align: center;
+        }
+
+        table{
+            margin: auto;
+            
+        }
+           
+    </style>
+   
+    
+
+    <script>
+        const start   = document.getElementById("start");
+        const teisi   = document.getElementById("teisi");
+        const reset   = document.getElementById("reset");
+        const s       = 1000;
+        let count     = 0;
+        let min       = 0;
+        let hour      = 0;
+        let set_id;
+        
+
+        function timer(){
+            count++;
+            if(count>=60){//count=60でminに1加算
+                count = 0;
+                min++;
+            }
+
+            if(min>=60){//min=60でhourに1加算
+                min = 0;
+                hour++;
+            }
+        }
+
+        function tokei(){
+            timer();
+            time.innerHTML = (hour>9 ? hour : "0" + hour)//hour>10のとき10のくらいは0で表示
+            + ":" 
+            + (min>9 ? min : "0" + min)//min>10のとき10のくらいは0で表示 
+            + ":" 
+            + (count>9 ? count : "0" + count);//count>10のとき10のくらいは0で表示
+        }
+
+        
+
+        //開始ボタンの処理
+        start.onclick = function(){
+            set_id = setInterval(tokei,s);//setInterval(関数,処理の間隔(ms))
+        }
+
+
+        //停止ボタンの処理
+        teisi.onclick = function(){
+            clearInterval(set_id)//clearInterval(setIntervalで指定したID)
+        }
+
+
+        //リセットボタンの処理
+        reset.onclick = function(){
+            count = 0;//初期値に戻す
+            clearInterval(set_id)//clearInterval(setIntervalで指定したID)
+            time.innerHTML = "00:00:00";//時間数表示
+        }
+
+        
+
+
+    </script>
+</body>
+</html>
+
+<!-- 参考文献
+タイトル：Delft Stack　Javascriptストップウォッチ
+筆者：不明
+掲載日：2021年7月3日
+https://www.delftstack.com/ja/howto/javascript/javascript-stopwatch/ -->
